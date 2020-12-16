@@ -1,1 +1,4 @@
 name: production-sample
+
+envs:
+  jekyll_env: "production"
