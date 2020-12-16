@@ -5,7 +5,7 @@ static_sites:
   environment_slug: jekyll
   github:
     deploy_on_push: false
-    branch: {{ requiredEnv "CI_REF_NAME" }}
+    branch: {{ requiredEnv "CI_REF_NAME_SLUG" }}
     repo: renehernandez/review-apps-in-app-platform
   name: sample-jekyll
   envs:
