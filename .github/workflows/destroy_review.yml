@@ -18,6 +18,7 @@ jobs:
       - uses: renehernandez/action-appfile@v0.0.1
       - name: Destroy App in review environment
         env:
+          CI_REF_NAME_SLUG: ${{ env.CI_HEAD_REF_SLUG }}
           DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DO_ACCESS_TOKEN }}
         run: |
           appfile destroy -f .do/appfile.yaml -e review --log-level debug
