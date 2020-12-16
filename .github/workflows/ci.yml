@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+
+jobs:
+  deploy_review_app:
+    runs-on: ubuntu-latest
+    name: Deploy review site
+    if: ${{ github.ref != 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: FranzDiebold/github-env-vars-action@v1.2.1
+      - uses: renehernandez/action-appfile@v0.0.1
+      - name: Deploy App in review environment
+        env:
+          DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DO_ACCESS_TOKEN }}
+        run: |
+          appfile sync -f .do/appfile.yaml -e review --log-level debug
+
+  deploy_production_site:
+    runs-on: ubuntu-latest
+    name: Deploy production site
+    if: ${{ github.ref == 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: FranzDiebold/github-env-vars-action@v1.2.1
+      - uses: renehernandez/action-appfile@v0.0.1
+      - name: Deploy App in production environment
+        env:
+          DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DO_ACCESS_TOKEN }}
+        run: |
+          appfile sync -f .do/appfile.yaml -e production --log-level debug
