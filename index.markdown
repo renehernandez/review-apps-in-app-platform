@@ -5,7 +5,7 @@
 layout: home
 ---
 
-{% if jeykill.environment == "production" %}
+{% if jekyll.environment == "production" %}
   Welcome to your production website
 {% else %}
   Welcome to your review website
