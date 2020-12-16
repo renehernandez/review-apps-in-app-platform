@@ -8,3 +8,6 @@ static_sites:
       repo: renehernandez/review-apps-in-app-platform
     dockerfile_path: Dockerfile.static
     output_dir: /app/public
+    envs:
+      - key: REVIEW_ENVIRONMENT
+        value: {{ .Values.envs.review_environment | quote }}

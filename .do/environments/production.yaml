@@ -1,1 +1,4 @@
 name: production-sample
+
+envs:
+  review_environment: "false"
