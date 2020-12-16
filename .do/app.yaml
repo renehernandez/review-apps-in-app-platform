@@ -4,7 +4,7 @@ static_sites:
 - build_command: bundle exec jekyll build -d ./public
   environment_slug: jekyll
   github:
-    deploy_on_push: false
+    deploy_on_push: true
     branch: {{ requiredEnv "CI_REF_NAME_SLUG" }}
     repo: renehernandez/review-apps-in-app-platform
   name: sample-jekyll
