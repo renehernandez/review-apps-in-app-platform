@@ -1,4 +1,4 @@
 name: review-sample-{{ requiredEnv "CI_REF_NAME" }}
 
 envs:
-  review_environment: "true"
+  jekyll_env: "review"

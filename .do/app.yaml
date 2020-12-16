@@ -1,13 +1,13 @@
 name: {{ .Values.name | trunc 32 }}
 
 static_sites:
-  - name: web
-    github:
-      deploy_on_push: false
-      branch: {{ requiredEnv "CI_REF_NAME" }}
-      repo: renehernandez/review-apps-in-app-platform
-    dockerfile_path: Dockerfile.static
-    output_dir: /app/public
-    envs:
-      - key: REVIEW_ENVIRONMENT
-        value: {{ .Values.envs.review_environment | quote }}
+- build_command: bundle exec jekyll build -d ./public
+  environment_slug: jekyll
+  github:
+    deploy_on_push: false
+    branch: {{ requiredEnv "CI_REF_NAME" }}
+    repo: renehernandez/review-apps-in-app-platform
+  name: sample-jekyll
+  envs:
+  - key: JEKYLL_ENV
+    value: {{ .Values.envs.jekyll_env | quote }}

@@ -1,0 +1,23 @@
+name: CI - Destroy Review
+
+on:
+  pull_request:
+    types: [closed]
+
+env:
+  REGISTRY: registry.digitalocean.com/ciconcierge
+  REPOSITORY: ciconcierge
+
+jobs:
+  destroy_review_app:
+    runs-on: ubuntu-latest
+    name: Destroy app
+    steps:
+      - uses: actions/checkout@v2
+      - uses: FranzDiebold/github-env-vars-action@v2
+      - uses: renehernandez/action-appfile@v0.0.1
+      - name: Destroy App in review environment
+        env:
+          DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DO_ACCESS_TOKEN }}
+        run: |
+          appfile destroy -f .do/appfile.yaml -e review --log-level debug
